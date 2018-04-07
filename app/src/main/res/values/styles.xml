@@ -1,11 +1,17 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <style name="MyTheme" parent="Theme.AppCompat.NoActionBar" >
+
+        <item name="android:colorBackground">@color/color_background_black</item>
+        <item name="android:textColorPrimary">@color/text_color_red</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorSecondaryInverse">@android:color/white</item>
+        <item name="colorPrimaryDark">@color/primary_dark_material_dark</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:navigationBarColor">@color/text_color_red</item>
+        <item name="android:statusBarColor">@color/text_color_red</item>
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="android:colorForeground">@android:color/white</item>
     </style>
 
 </resources>

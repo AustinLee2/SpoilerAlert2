@@ -25,6 +25,10 @@ public class LoginActivity extends AppCompatActivity {
                 .setAvailableProviders(Arrays.asList(
                         new AuthUI.IdpConfig.EmailBuilder().build(),
                         new AuthUI.IdpConfig.GoogleBuilder().build()))
+                //Logo we are using with Firebase
+                .setLogo(R.drawable.spoiler_alert_logo)
+                //Setting our new theme with Firebase
+                .setTheme(R.style.MyTheme)
                 .setIsSmartLockEnabled(false)
                 .build(), RC_SIGN_IN
         );

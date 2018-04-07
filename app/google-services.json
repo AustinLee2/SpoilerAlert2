@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "96893453350",
+    "firebase_url": "https://spoileralert2-a231a.firebaseio.com",
+    "project_id": "spoileralert2-a231a",
+    "storage_bucket": "spoileralert2-a231a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96893453350:android:f5d8998e546a085c",
+        "android_client_info": {
+          "package_name": "com.austinhlee.spoileralert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96893453350-vgabcp8o8ebcbrs85ppar3gunt50fdgv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.austinhlee.spoileralert",
+            "certificate_hash": "fbf81a4d3401a301adc2cd9177e89dfc74443eb1"
+          }
+        },
+        {
+          "client_id": "96893453350-v2v5l3pke71hlp5nei010b6fulh3ptmt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.austinhlee.spoileralert",
+            "certificate_hash": "db3b61734ec43850657e3bd7d69445c73996b0c7"
+          }
+        },
+        {
+          "client_id": "96893453350-iakmc5ud32fqjneo9gabg3hh8n66nono.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ2_SIe1WK2vSRjDlDgePZ17akE9vSs2c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "96893453350-iakmc5ud32fqjneo9gabg3hh8n66nono.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

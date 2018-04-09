@@ -23,7 +23,7 @@
         android:id="@+id/nameOfSpoilerAlert"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="45dp"
         android:hint="@string/category_name_spoiler"
         android:padding="15dp"
         android:textAlignment="center"
@@ -48,20 +48,6 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/timeLength"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/enter_time"
-        android:padding="15dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent"
-        android:textColorLink="@color/colorAccent"
-        android:backgroundTint="@color/colorAccent"
-        android:textStyle="bold" />
-
-    <EditText
         android:id="@+id/shareWithContacts"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -75,12 +61,43 @@
         android:backgroundTint="@color/colorAccent"
         android:textStyle="bold" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/setTime"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/colorAccent"
+            android:text="@string/set_time_text"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/setDate"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/colorAccent"
+            android:text="@string/set_date_text"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/submitSpoilerAlertButton"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="35dp"
         android:text="@string/submit_spoiler_alert"
         android:textColor="@color/colorPrimary"
         android:background="@drawable/rounded_submitbutton"/>

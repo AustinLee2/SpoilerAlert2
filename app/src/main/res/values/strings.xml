@@ -3,4 +3,9 @@
     <string name="homeText_item">Home</string>
     <string name="contactsText_item">Contacts</string>
     <string name="spoilersText_item">Spoilers</string>
+    <string name="category_name_spoiler">Enter Spoiler Alert Name</string>
+    <string name="trigger_words">Enter "Trigger Words"</string>
+    <string name="enter_time">Enter Time Length Here</string>
+    <string name="add_contacts_here">Add People to Share With</string>
+    <string name="submit_spoiler_alert">Submit Spoiler Alert</string>
 </resources>

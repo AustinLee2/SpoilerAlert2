@@ -19,12 +19,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mAuth = FirebaseAuth.getInstance();
         // Choose authentication providers
         startActivityForResult(AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(Arrays.asList(
                         new AuthUI.IdpConfig.EmailBuilder().build(),
                         new AuthUI.IdpConfig.GoogleBuilder().build()))
+                //Logo we are using with Firebase
+                .setLogo(R.drawable.spoiler_alert_logo)
+                //Setting our new theme with Firebase
+                .setTheme(R.style.MyTheme)
                 .setIsSmartLockEnabled(false)
                 .build(), RC_SIGN_IN
         );

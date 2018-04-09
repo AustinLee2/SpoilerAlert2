@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "96893453350-vgabcp8o8ebcbrs85ppar3gunt50fdgv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.austinhlee.spoileralert",
+            "certificate_hash": "fbf81a4d3401a301adc2cd9177e89dfc74443eb1"
+          }
+        },
+        {
           "client_id": "96893453350-v2v5l3pke71hlp5nei010b6fulh3ptmt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

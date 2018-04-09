@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_item"
+        android:icon="@drawable/home_icon"
+        android:title="@string/homeText_item"/>
+    <item
+        android:id="@+id/contacts_item"
+        android:icon="@drawable/contacts_icon"
+        android:title="@string/contactsText_item"
+        />
+    <item
+        android:id="@+id/spoilers_item"
+        android:icon="@drawable/spoiler_alert_logo_only"
+        android:title="@string/spoilersText_item"/>
+
+</menu>

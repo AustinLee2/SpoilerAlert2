@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent loginIntent = new Intent(this, LoginActivity.class);
-        startActivityForResult(loginIntent, RC_SIGN_IN);
+        startActivity(loginIntent);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
@@ -60,24 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-            //succesfully signed in
-            if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "Already Signed In!", Toast.LENGTH_LONG).show();
-                return;
-            } else {
-                if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    Toast.makeText(this, "No network connection!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-            }
-        }
-    }
 
     }
 

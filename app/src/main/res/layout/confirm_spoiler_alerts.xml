@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -21,30 +20,31 @@
 
     <EditText
         android:id="@+id/nameOfSpoilerAlert"
-        android:layout_width="250dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/rounded_edittext"
         android:hint="@string/category_name_spoiler"
         android:padding="15dp"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent"
-        android:textColorLink="@color/colorAccent"
-        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        android:textCursorDrawable="@null"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/triggerWords"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/colorAccent"
         android:hint="@string/trigger_words"
         android:padding="15dp"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent"
-        android:textColorLink="@color/colorAccent"
-        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        android:textColorLink="@color/colorPrimary"
+        android:textCursorDrawable="@null"
         android:textStyle="bold" />
 
     <EditText
@@ -52,13 +52,14 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
         android:hint="@string/enter_time"
         android:padding="15dp"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent"
-        android:textColorLink="@color/colorAccent"
-        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        android:textColorLink="@color/colorPrimary"
+        android:textCursorDrawable="@null"
         android:textStyle="bold" />
 
     <EditText
@@ -66,24 +67,23 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
         android:hint="@string/add_contacts_here"
         android:padding="15dp"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent"
-        android:textColorLink="@color/colorAccent"
-        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        android:textColorLink="@color/colorPrimary"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/submitSpoilerAlertButton"
-        android:layout_width="250dp"
+        android:id="@+id/button2"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/submit_spoiler_alert"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:background="@drawable/rounded_submitbutton"/>
-
 
 </LinearLayout>

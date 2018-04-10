@@ -18,72 +18,48 @@
         android:textSize="30sp"
         />
 
-    <EditText
-        android:id="@+id/nameOfSpoilerAlert"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/SpoilerAlertName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/category_name_spoiler"
-        android:padding="15dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@color/colorPrimary"
-        android:textCursorDrawable="@null"
-        android:textStyle="bold" />
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="Spoiler Alert Name" />
 
-    <EditText
-        android:id="@+id/triggerWords"
-        android:layout_width="250dp"
+    <TextView
+        android:id="@+id/ListofSpoilerAlerts"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:background="@color/colorAccent"
-        android:hint="@string/trigger_words"
-        android:padding="15dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@color/colorPrimary"
-        android:textColorLink="@color/colorPrimary"
-        android:textCursorDrawable="@null"
-        android:textStyle="bold" />
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="List of Potential Spoilers" />
 
-    <EditText
-        android:id="@+id/timeLength"
-        android:layout_width="250dp"
+    <TextView
+        android:id="@+id/PeopleSharedWith"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorAccent"
-        android:hint="@string/enter_time"
-        android:padding="15dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@color/colorPrimary"
-        android:textColorLink="@color/colorPrimary"
-        android:textCursorDrawable="@null"
-        android:textStyle="bold" />
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="People Shared With"
+        />
 
-    <EditText
-        android:id="@+id/shareWithContacts"
-        android:layout_width="250dp"
+    <TextView
+        android:id="@+id/TimeAndDate"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorAccent"
-        android:hint="@string/add_contacts_here"
-        android:padding="15dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@color/colorPrimary"
-        android:textColorLink="@color/colorPrimary"
-        android:textStyle="bold" />
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="Alert Ends On: Time and Date"
+        />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/submit_spoiler_alert"
-        android:textColor="@color/colorAccent"
-        android:background="@drawable/rounded_submitbutton"/>
+    android:id="@+id/ConfirmSpoilerAlertButton"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="60dp"
+    android:layout_marginBottom="35dp"
+    android:text="@string/confirm_spoiler_alert"
+    android:textColor="@color/colorPrimary"
+    android:background="@drawable/rounded_submitbutton"/>
 
 </LinearLayout>

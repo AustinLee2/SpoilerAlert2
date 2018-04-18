@@ -1,20 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/title_textview"
+        android:id="@+id/spoilerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Spoiler Name"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:text="Spoilers" />
 
-    <TextView
-        android:id="@+id/filterWords_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Words, words, words, words"/>
 
-</LinearLayout>
+
+        <TextView
+            android:id="@+id/nameOfSpoilerAlert_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spoilerTextView"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            tools:text="Name of Spoiler" />
+
+        <TextView
+            android:id="@+id/add_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/spoilerTextView"
+            android:layout_below="@+id/spoilerTextView"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            tools:text="Add" />
+
+        <TextView
+            android:id="@+id/delete_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/spoilerTextView"
+            android:layout_marginEnd="71dp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            tools:text="Delete" />
+
+        <TextView
+            android:id="@+id/share_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/spoilerTextView"
+            android:layout_marginEnd="14dp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            tools:text="Share" />
+
+            <TextView
+                android:id="@+id/spoilerAlertName_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameOfSpoilerAlert_textview"
+                android:layout_weight="1"
+                tools:text="Spoiler Alert Name" />
+
+            <TextView
+                android:id="@+id/filterWords_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spoilerAlertName_textview"
+                android:layout_weight="1"
+                tools:text="Words, words, words, words" />
+
+                <ImageButton
+                    android:id="@+id/addButton"
+                    android:layout_width="35dp"
+                    android:layout_height="34dp"
+                    android:layout_alignBottom="@+id/filterWords_textview"
+                    android:layout_alignEnd="@+id/spoilerTextView"
+                    android:layout_marginEnd="-6dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/ic_input_add" />
+
+                <ImageButton
+                    android:id="@+id/deleteButton"
+                    android:layout_width="37dp"
+                    android:layout_height="34dp"
+                    android:layout_alignBottom="@+id/filterWords_textview"
+                    android:layout_alignStart="@+id/delete_textview"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/ic_delete" />
+
+                <ImageButton
+                    android:id="@+id/shareButton"
+                    android:layout_width="36dp"
+                    android:layout_height="37dp"
+                    android:layout_alignStart="@+id/share_textview"
+                    android:layout_alignTop="@+id/addButton"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/contacts_icon" />
+
+
+</RelativeLayout>

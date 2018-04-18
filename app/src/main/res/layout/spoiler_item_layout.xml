@@ -12,6 +12,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/spoilerTextView"
             android:layout_weight="1"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             tools:text="Name of Spoiler" />
 
@@ -22,7 +24,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="124dp"
+        android:layout_marginTop="0dp"
         android:layout_weight="1"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         tools:text="Add" />
 
@@ -32,10 +37,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="65dp"
+        android:layout_marginEnd="72dp"
         android:layout_weight="1"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"
-        tools:text="Delete" />
+        tools:text="Erase" />
 
     <TextView
         android:id="@+id/share_textview"
@@ -43,8 +50,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="17dp"
+        android:layout_marginEnd="24dp"
         android:layout_weight="1"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         tools:text="Share" />
 
@@ -54,6 +63,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/nameOfSpoilerAlert_textview"
                 android:layout_weight="1"
+                android:textSize="14sp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
                 tools:text="Spoiler Alert Name" />
 
             <TextView
@@ -61,6 +73,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/spoilerAlertName_textview"
+                android:textSize="10sp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
                 android:layout_weight="1"
                 tools:text="Words, words, words, words" />
 
@@ -68,8 +83,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/filterWords_textview"
-        android:layout_alignStart="@+id/add_textview"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/nameOfSpoilerAlert_textview"
+        android:layout_marginEnd="31dp"
         android:orientation="horizontal">
 
         <ImageButton
@@ -84,8 +100,8 @@
             android:id="@+id/deleteButton"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_weight="1"
             android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:background="@color/colorPrimary"
             app:srcCompat="@android:drawable/ic_delete" />
 
@@ -93,8 +109,8 @@
             android:id="@+id/shareButton"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_weight="1"
             android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:background="@color/colorPrimary"
             app:srcCompat="@drawable/contacts_icon" />
     </LinearLayout>

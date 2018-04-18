@@ -17,13 +17,16 @@
         android:text="@string/spoilersText_item"
         android:textColor="@color/white"
         android:textSize="30sp"
+        android:layout_marginTop="25dp"
         android:textStyle="bold" />
-    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/spoiler_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="75dp"
+        />
+    </RelativeLayout>
 
 </LinearLayout>
 

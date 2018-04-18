@@ -17,7 +17,6 @@
         android:text="@string/spoilersText_item"
         android:textColor="@color/white"
         android:textSize="30sp"
-        android:layout_marginTop="25dp"
         android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView

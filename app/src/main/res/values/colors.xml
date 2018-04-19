@@ -19,4 +19,5 @@
     <color name="color_background_black">#020202</color>
     <color name="text_color_red">#ddf6010d</color>
     <color name="white">#FFFFFF</color>
+    <color name="green">#ff669900</color>
 </resources>

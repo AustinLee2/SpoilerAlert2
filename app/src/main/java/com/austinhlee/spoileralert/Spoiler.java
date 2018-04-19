@@ -10,6 +10,7 @@ public class Spoiler {
 
     private String title;
     private String filterWords;
+    private long reminderTime;
     private String uid;
 
     public Spoiler(){
@@ -38,5 +39,13 @@ public class Spoiler {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public long getReminderTime() {
+        return reminderTime;
+    }
+
+    public void setReminderTime(long reminderTime) {
+        this.reminderTime = reminderTime;
     }
 }

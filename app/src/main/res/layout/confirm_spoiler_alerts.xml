@@ -7,16 +7,29 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
+
     <TextView
-        android:id="@+id/homeTextView"
+        android:id="@+id/confirmSpoilerAlertTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/homeText_item"
+        android:text="@string/confirm_spoiler_alert"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="30sp"
         />
+
+    <TextView
+        android:id="@+id/nameOfSpoilerAlert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:text="@string/name_of_spoilerAlert"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/SpoilerAlertName"
@@ -24,8 +37,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
+        android:layout_marginVertical="10dp"
         android:text="Spoiler Alert Name"
-        android:textSize="20sp" />
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/potentialSpoilers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:text="@string/list_of_potential_spoilers"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/ListofSpoilerAlerts"
@@ -33,7 +60,22 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="List of Potential Spoilers" />
+        android:layout_marginVertical="10dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:text="Potential Spoilers" />
+
+    <TextView
+        android:id="@+id/PeopleSharedWithPlaceholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorAccent"
+        android:gravity="center_horizontal"
+        android:text="@string/shared_with"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/PeopleSharedWith"
@@ -41,8 +83,23 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:layout_marginVertical="10dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         android:text="People Shared With"
         />
+
+    <TextView
+        android:id="@+id/timeAndDate_PlaceHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:text="@string/time_and_date"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/TimeAndDate"
@@ -50,6 +107,9 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:layout_marginVertical="10dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         android:text="Alert Ends On: Time and Date"
         />
 

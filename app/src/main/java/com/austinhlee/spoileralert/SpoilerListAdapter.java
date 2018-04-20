@@ -51,7 +51,7 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
     }
 
     SpoilerListAdapter(Context context, DatabaseReference ref){
-        super(Spoiler.class, R.layout.spoiler_item_layout, SpoilerViewHolder    .class, ref);
+        super(Spoiler.class, R.layout.spoiler_item_layout, SpoilerViewHolder.class, ref);
         mContext = context;
     }
 

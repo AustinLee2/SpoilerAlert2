@@ -3,6 +3,7 @@ package com.austinhlee.spoileralert;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -88,22 +90,9 @@ public class HomeFragment extends Fragment {
                 Log.d("TAG", "onClick");
             }
         });
+
+
         return view;
-    }
-
-    public void writeNewSpoiler(String spoilerTitle, String filterWords, long time){
-        Spoiler spoiler = new Spoiler();
-        spoiler.setTitle(spoilerTitle);
-        spoiler.setFilterWords(filterWords);
-        spoiler.setReminderTime(time);
-        String key = mDatabase.push().getKey();
-        mDatabase.child(key).setValue(spoiler);
-    }
-
-    public long getUnixTimeFromFragments(){
-        Calendar cal = Calendar.getInstance();
-        cal.set(mDatePickerFragment.getYear(),mDatePickerFragment.getMonth(),mDatePickerFragment.getDay(),mTimePickerFragment.getHour(),mTimePickerFragment.getMinute());
-        return cal.getTimeInMillis();
     }
 
 }

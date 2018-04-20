@@ -22,9 +22,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="80dp"
+        android:layout_marginEnd="128dp"
         android:layout_weight="1"
         android:text="@string/editText"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/erase_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="74dp"
+        android:layout_weight="1"
+        android:text="Erase"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -74,13 +87,22 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/deleteButton"
+            android:id="@+id/editButton"
             android:layout_width="38dp"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             app:srcCompat="@android:drawable/ic_menu_edit" />
+
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="38dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            app:srcCompat="@android:drawable/ic_delete" />
 
         <ImageButton
             android:id="@+id/shareButton"

@@ -28,6 +28,7 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
         public TextView mTimeAndDateTextView;
         public ImageButton mDeleteButton;
         public ImageButton mShareButton;
+        public ImageButton mEditButton;
 
 
 
@@ -39,6 +40,7 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
             mTimeAndDateTextView = (TextView) itemView.findViewById(R.id.timeAndDate_textview);
             mDeleteButton = (ImageButton) itemView.findViewById(R.id.deleteButton);
             mShareButton =(ImageButton) itemView.findViewById(R.id.shareButton);
+            mEditButton =(ImageButton) itemView.findViewById(R.id.editButton);
         }
     }
 

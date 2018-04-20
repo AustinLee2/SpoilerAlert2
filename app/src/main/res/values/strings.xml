@@ -13,11 +13,12 @@
     <string name="editText"><u>Edit</u></string>
     <string name="shareText"><u>Share</u></string>
     <string name="spoiler_alert_name"><u>Spoiler Alert Name</u></string>
-    <string name="confirm_spoiler_alert">Confirm Spoiler Alert</string>
+    <string name="confirm_spoiler_alert">Confirm</string>
     <string name="name_of_spoiler"><u>Name of Spoiler</u></string>
     <string name="name_of_spoilerAlert">Name of SpoilerAlert</string>
     <string name="shared_with">Shared With</string>
     <string name="list_of_potential_spoilers">List of Potential Spoilers</string>
     <string name="time_and_date">Time and Date</string>
+    <string name="sign_out">Sign Out</string>
 
 </resources>

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/confirm_spoiler_alert"
+        android:text="Confirm Spoiler Alert"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="30sp"
@@ -39,6 +39,7 @@
         android:gravity="center_horizontal"
         android:layout_marginVertical="10dp"
         android:text="Spoiler Alert Name"
+        android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="15sp" />
 
@@ -113,14 +114,35 @@
         android:text="Alert Ends On: Time and Date"
         />
 
-    <Button
-    android:id="@+id/ConfirmSpoilerAlertButton"
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="60dp"
-    android:layout_marginBottom="35dp"
-    android:text="@string/confirm_spoiler_alert"
-    android:textColor="@color/colorPrimary"
-    android:background="@drawable/rounded_submitbutton"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ConfirmSpoilerAlertButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="65dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_submitbutton"
+            android:text="@string/confirm_spoiler_alert"
+            android:textColor="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/CancelSpoilerAlertButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="65dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_cancelbutton"
+            android:text="Cancel"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
 
 </LinearLayout>

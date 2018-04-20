@@ -12,8 +12,8 @@
     <string name="set_time_text">Set Time</string>
     <string name="set_date_text">Set Date</string>
     <string name="name_of_spoiler"><u>Name of Spoiler</u></string>
-    <string name="addText"><u>Add</u></string>
-    <string name="eraseText"><u>Erase</u></string>
+    <string name="editText"><u>Edit</u></string>
     <string name="shareText"><u>Share</u></string>
+    <string name="spoiler_alert_name"><u>Spoiler Alert Name</u></string>
 
 </resources>

@@ -23,13 +23,9 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
 
 
         public TextView mSpoilerPlaceHolder;
-        public TextView mNameofSpoilerAlert;
-        public TextView mAddTextView;
-        public TextView mDeleteTextView;
-        public TextView mShareTextView;
         public TextView mTitleTextView;
         public TextView mFilterWordsTextView;
-        public ImageButton mAddButton;
+        public TextView mTimeAndDateTextView;
         public ImageButton mDeleteButton;
         public ImageButton mShareButton;
 
@@ -38,13 +34,9 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
         public SpoilerViewHolder(View itemView){
             super(itemView);
             mSpoilerPlaceHolder = (TextView) itemView.findViewById(R.id.spoilerTextView);
-            mNameofSpoilerAlert = (TextView) itemView.findViewById(R.id.nameOfSpoilerAlert_textview);
-            mAddTextView = (TextView) itemView.findViewById(R.id.add_textview);
-            mDeleteTextView = (TextView) itemView.findViewById(R.id.delete_textview);
-            mShareTextView = (TextView) itemView.findViewById(R.id.share_textview);
             mTitleTextView = (TextView) itemView.findViewById(R.id.spoilerAlertName_textview);
             mFilterWordsTextView = (TextView) itemView.findViewById(R.id.filterWords_textview);
-            mAddButton = (ImageButton) itemView.findViewById(R.id.addButton);
+            mTimeAndDateTextView = (TextView) itemView.findViewById(R.id.timeAndDate_textview);
             mDeleteButton = (ImageButton) itemView.findViewById(R.id.deleteButton);
             mShareButton =(ImageButton) itemView.findViewById(R.id.shareButton);
         }

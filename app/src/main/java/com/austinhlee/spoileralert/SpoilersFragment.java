@@ -1,7 +1,11 @@
 package com.austinhlee.spoileralert;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Telephony;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,15 +43,16 @@ public class SpoilersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_spoilers, container, false);
         this.mView = view;
         mContext = getContext();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("spoilers");
         mSpoilerListAdapter = new SpoilerListAdapter(mContext, mDatabase);
-        mRecyclerView = (RecyclerView)mView.findViewById(R.id.spoiler_recyclerview);
+        mRecyclerView = (RecyclerView) mView.findViewById(R.id.spoiler_recyclerview);
         mRecyclerView.setAdapter(mSpoilerListAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(layoutManager);
         mFirebaseAuth = FirebaseAuth.getInstance();
+
         return view;
     }
 }

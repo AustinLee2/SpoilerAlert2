@@ -11,6 +11,7 @@
     <string name="set_time_text">Set Time</string>
     <string name="set_date_text">Set Date</string>
     <string name="editText"><u>Edit</u></string>
+    <string name="eraseText"><u>Erase</u></string>
     <string name="shareText"><u>Share</u></string>
     <string name="spoiler_alert_name"><u>Spoiler Alert Name</u></string>
     <string name="confirm_spoiler_alert">Confirm</string>

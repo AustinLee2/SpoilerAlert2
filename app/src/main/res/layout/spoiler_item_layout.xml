@@ -37,7 +37,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="74dp"
         android:layout_weight="1"
-        android:text="Erase"
+        android:text="@string/eraseText"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold" />

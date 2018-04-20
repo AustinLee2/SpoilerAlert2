@@ -1,8 +1,10 @@
 package com.austinhlee.spoileralert;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,15 +17,25 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
+
 public class HomeFragment extends Fragment {
 
     private FirebaseAuth mFirebaseAuth;
     private Button mSubmitButton;
+    private Button mTimeButton;
+    private Button mDateButton;
     private EditText mTitleEditText;
     private EditText mFilterWordsEditText;
     private DatabaseReference mDatabase;
     private View mView;
     private Context mContext;
+    private TimePickerFragment mTimePickerFragment;
+    private DatePickerFragment mDatePickerFragment;
+
+    public static final int CONFIRM_REQUEST_CODE = 521;
+    public static final String SPOILER_TITLE_EXTRA_KEY = "com.austinhlee.spoileralert.SPOILER_TITLE";
+    public static final String FILTER_WORDS_EXTRA_KEY = "com.austinhlee.spoileralert.FILTER_WORDS";
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -46,23 +58,52 @@ public class HomeFragment extends Fragment {
         mTitleEditText = (EditText)mView.findViewById(R.id.nameOfSpoilerAlert);
         mFilterWordsEditText = (EditText)mView.findViewById(R.id.triggerWords);
         mSubmitButton = (Button)mView.findViewById(R.id.submitSpoilerAlertButton);
+        mDatePickerFragment = new DatePickerFragment();
+        mDateButton = (Button)mView.findViewById(R.id.setDate);
+        mDatePickerFragment = new DatePickerFragment();
+        mDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDatePickerFragment.show(getFragmentManager(), "datepicker");
+            }
+        });
+        mTimePickerFragment = new TimePickerFragment();
+        mTimeButton = (Button)mView.findViewById(R.id.setTime);
+        mTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mTimePickerFragment.show(getFragmentManager(), "timepicker");
+            }
+        });
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String spoilerTitle = mTitleEditText.getText().toString();
                 String filterWords = mFilterWordsEditText.getText().toString();
-                writeNewSpoiler(spoilerTitle, filterWords);
+                Intent intent = new Intent(getActivity(), ConfirmActivity.class);
+                intent.putExtra(SPOILER_TITLE_EXTRA_KEY, spoilerTitle);
+                intent.putExtra(FILTER_WORDS_EXTRA_KEY, filterWords);
+                startActivityForResult(intent, CONFIRM_REQUEST_CODE);
+                //writeNewSpoiler(spoilerTitle, filterWords, getUnixTimeFromFragments());
                 Log.d("TAG", "onClick");
             }
         });
         return view;
     }
 
-    public void writeNewSpoiler(String spoilerTitle, String filterWords){
+    public void writeNewSpoiler(String spoilerTitle, String filterWords, long time){
         Spoiler spoiler = new Spoiler();
         spoiler.setTitle(spoilerTitle);
         spoiler.setFilterWords(filterWords);
+        spoiler.setReminderTime(time);
         String key = mDatabase.push().getKey();
         mDatabase.child(key).setValue(spoiler);
     }
+
+    public long getUnixTimeFromFragments(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(mDatePickerFragment.getYear(),mDatePickerFragment.getMonth(),mDatePickerFragment.getDay(),mTimePickerFragment.getHour(),mTimePickerFragment.getMinute());
+        return cal.getTimeInMillis();
+    }
+
 }

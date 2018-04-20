@@ -15,5 +15,6 @@
     <string name="addText"><u>Add</u></string>
     <string name="eraseText"><u>Erase</u></string>
     <string name="shareText"><u>Share</u></string>
+    <string name="spoiler_alert_name"><u>Spoiler Alert Name</u></string>
 
 </resources>

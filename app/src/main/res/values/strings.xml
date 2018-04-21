@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SpoilerAlert</string>
     <string name="homeText_item">Home</string>
+    <string name="editSpoilerText_item">Edit Spoiler Alert</string>
     <string name="shareText_item">Share</string>
     <string name="spoilersText_item">Spoilers</string>
     <string name="category_name_spoiler">Enter Spoiler Alert Name</string>
@@ -8,6 +9,9 @@
     <string name="enter_time">Enter Time Length Here</string>
     <string name="add_contacts_here">Add People to Share With</string>
     <string name="submit_spoiler_alert">Submit Spoiler Alert</string>
+    <string name="resubmit_spoiler_alert">Re-Submit Spoiler Alert</string>
+    <string name="cancel_spoiler_alert">Cancel</string>
+    <string name="cancel_edit">Cancel Edits</string>
     <string name="set_time_text">Set Time</string>
     <string name="set_date_text">Set Date</string>
     <string name="editText"><u>Edit</u></string>
@@ -21,5 +25,6 @@
     <string name="list_of_potential_spoilers">List of Potential Spoilers</string>
     <string name="time_and_date">Time and Date</string>
     <string name="sign_out">Sign Out</string>
+    <string name="potential_spoilers">Potential Spoilers</string>
 
 </resources>

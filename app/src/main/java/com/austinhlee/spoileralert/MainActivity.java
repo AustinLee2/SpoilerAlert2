@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+
         IncomingSms.bindListener(new IncomingSms.SmsListener() {
             @Override
             public void messageReceived(String messageText) {

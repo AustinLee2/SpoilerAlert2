@@ -1,5 +1,6 @@
 package com.austinhlee.spoileralert;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,9 @@ public class ConfirmActivity extends AppCompatActivity{
     private TextView mNameTextView;
     private TextView mFilterWordsTextView;
     private Button confirmButton;
+    private Button cancelButton;
     private Intent mIntent;
+    private Context mContext;
     private DatabaseReference mSpoilersRef;
     private DatabaseReference mNewSpoilerRef;
     private DatabaseReference ref;
@@ -35,6 +38,7 @@ public class ConfirmActivity extends AppCompatActivity{
         ref = database.getReference();
         mSpoilersRef =  ref.child("spoilers");
         confirmButton = (Button)findViewById(R.id.ConfirmSpoilerAlertButton);
+        cancelButton = (Button)findViewById(R.id.cancelSpoilerAlertButton);
         mNameTextView = (TextView)findViewById(R.id.SpoilerAlertName);
         mNameTextView.setText(mIntent.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY));
         mFilterWordsTextView = (TextView)findViewById(R.id.ListofSpoilerAlerts);

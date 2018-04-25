@@ -7,8 +7,8 @@
         android:title="@string/homeText_item"/>
     <item
         android:id="@+id/contacts_item"
-        android:icon="@drawable/contacts_icon"
-        android:title="@string/shareText_item"
+        android:icon="@drawable/qr_scan4"
+        android:title="@string/scan_buttonText"
         />
     <item
         android:id="@+id/spoilers_item"

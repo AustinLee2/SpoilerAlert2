@@ -1,6 +1,7 @@
 package com.austinhlee.spoileralert;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -54,5 +55,13 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
     protected void populateViewHolder(SpoilerListAdapter.SpoilerViewHolder viewHolder, Spoiler model, int position) {
         viewHolder.mTitleTextView.setText(model.getTitle());
         viewHolder.mFilterWordsTextView.setText(model.getFilterWords());
+        viewHolder.mTimeAndDateTextView.setText(Long.toString(model.getReminderTime()));
+        viewHolder.mEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, EditActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
 }

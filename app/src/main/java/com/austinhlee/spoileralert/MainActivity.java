@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 //            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, MY_PERMISSIONS_REQUEST_SMS_RECEIVE);
         }
-        if (mFirebaseAuth == null) {
+        if (mFirebaseAuth.getCurrentUser() == null) {
             startActivity(loginIntent);
         }
 
@@ -139,7 +139,14 @@ public class MainActivity extends AppCompatActivity {
             Log.i("TAG", "MY_PERMISSIONS_REQUEST_SMS_RECEIVE --> YES");
         }
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == HomeFragment.CONFIRM_REQUEST_CODE){
+            if (resultCode == RESULT_CANCELED){
+                Log.d("Tag", "Confirm cancelled!");
+            }
+        }
+    }
     private boolean wordInList(String word, List<String> list){
         for(String str: list) {
             if(str.trim().contains(word))

@@ -34,6 +34,7 @@ public class HomeFragment extends Fragment {
     private Context mContext;
     private TimePickerFragment mTimePickerFragment;
     private DatePickerFragment mDatePickerFragment;
+    private Button mSignOutButton;
 
     public static final int CONFIRM_REQUEST_CODE = 521;
     public static final String SPOILER_TITLE_EXTRA_KEY = "com.austinhlee.spoileralert.SPOILER_TITLE";
@@ -59,6 +60,7 @@ public class HomeFragment extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mTitleEditText = (EditText)mView.findViewById(R.id.nameOfSpoilerAlert);
         mFilterWordsEditText = (EditText)mView.findViewById(R.id.triggerWords);
+        mSignOutButton = (Button)mView.findViewById(R.id.sign_out);
         mSubmitButton = (Button)mView.findViewById(R.id.submitSpoilerAlertButton);
         mDatePickerFragment = new DatePickerFragment();
         mDateButton = (Button)mView.findViewById(R.id.setDate);
@@ -75,6 +77,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mTimePickerFragment.show(getFragmentManager(), "timepicker");
+            }
+        });
+        mSignOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFirebaseAuth.signOut();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                Log.d("TAG", "signout clicked");
             }
         });
         mSubmitButton.setOnClickListener(new View.OnClickListener() {

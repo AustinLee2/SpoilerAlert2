@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".EditActivity"></activity>
         <activity android:name=".ConfirmActivity"></activity>
         <receiver android:name=".IncomingSms"
             android:permission="android.permission.BROADCAST_SMS">

@@ -19,6 +19,7 @@ public class ConfirmActivity extends AppCompatActivity{
 
     private TextView mNameTextView;
     private TextView mFilterWordsTextView;
+    private TextView mDateAndTimeTextView;
     private Button confirmButton;
     private Button cancelButton;
     private Intent mIntent;
@@ -37,8 +38,18 @@ public class ConfirmActivity extends AppCompatActivity{
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
         mSpoilersRef =  ref.child("spoilers");
+        mDateAndTimeTextView = (TextView)findViewById(R.id.timeAndDate_textview);
+        //if (mIntent.hasExtra())
+        //mDateAndTimeTextView.setText(mIntent);
         confirmButton = (Button)findViewById(R.id.ConfirmSpoilerAlertButton);
         cancelButton = (Button)findViewById(R.id.cancelSpoilerAlertButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
         mNameTextView = (TextView)findViewById(R.id.SpoilerAlertName);
         mNameTextView.setText(mIntent.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY));
         mFilterWordsTextView = (TextView)findViewById(R.id.ListofSpoilerAlerts);

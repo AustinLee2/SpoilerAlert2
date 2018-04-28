@@ -54,13 +54,13 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorAccent"
         android:hint="@string/add_contacts_here"
         android:padding="15dp"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textColorHint="@color/colorPrimary"
         android:textColorLink="@color/colorAccent"
-        android:backgroundTint="@color/colorAccent"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -74,8 +74,8 @@
             android:id="@+id/setTime"
             android:layout_width="112dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginStart="42dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="58dp"
             android:background="@color/colorAccent"
             android:text="@string/set_time_text"
             android:textColor="@color/colorPrimary"
@@ -85,7 +85,6 @@
             android:id="@+id/setDate"
             android:layout_width="112dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:background="@color/colorAccent"
             android:text="@string/set_date_text"
             android:textColor="@color/colorPrimary"
@@ -93,7 +92,7 @@
 
     </LinearLayout>
 
-    
+
     <Button
         android:id="@+id/resubmitSpoilerAlertButton"
         android:layout_width="250dp"

@@ -13,9 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,14 +33,21 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
     private FirebaseAuth mFirebaseAuth;
+    private DatabaseReference ref;
+    private DatabaseReference mUsersRef;
+    private FirebaseDatabase mDatabase;
     private int MY_PERMISSIONS_REQUEST_SMS_RECEIVE = 10;
     private Context mContext;
+    private String userUID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
+        ref = mDatabase.getReference();
+        mUsersRef =  ref.child("users");
         mContext = this;
         Intent loginIntent = new Intent(this, LoginActivity.class);
         if (!Telephony.Sms.getDefaultSmsPackage(mContext).equals(getPackageName())){
@@ -53,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("spoilers");
+        userUID = FirebaseAuth.getInstance().getUid();
+        DatabaseReference ref = database.getReference("users").child(userUID);
         final List<String> filterWords = new ArrayList<>();
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
@@ -146,6 +156,15 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Tag", "Confirm cancelled!");
             }
         }
+        else if (requestCode == SpoilerListAdapter.EDIT_RC){
+            if (resultCode == RESULT_OK){
+                String uid = data.getStringExtra(SpoilerListAdapter.UID_KEY);
+                String title = data.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY);
+                String words = data.getStringExtra(EditActivity.WORDS_KEY);
+                writeNewSpoiler(title,words,0);
+                mUsersRef.child(userUID).child(uid).removeValue();
+            }
+        }
     }
     private boolean wordInList(String word, List<String> list){
         for(String str: list) {
@@ -153,5 +172,16 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return false;
+    }
+    public void writeNewSpoiler(String spoilerTitle, String filterWords, long time){
+        Spoiler spoiler = new Spoiler();
+        spoiler.setTitle(spoilerTitle);
+        spoiler.setFilterWords(filterWords);
+        spoiler.setReminderTime(time);
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        String uniqueId = user.getUid();
+        DatabaseReference spoilerRef = mUsersRef.child(uniqueId).push();
+        spoiler.setUid(spoilerRef.getKey());
+        spoilerRef.setValue(spoiler);
     }
 }

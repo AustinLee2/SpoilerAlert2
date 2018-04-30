@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,20 +26,21 @@ public class ConfirmActivity extends AppCompatActivity{
     private Button cancelButton;
     private Intent mIntent;
     private Context mContext;
-    private DatabaseReference mSpoilersRef;
-    private DatabaseReference mNewSpoilerRef;
+    private DatabaseReference mUsersRef;
     private DatabaseReference ref;
     private FirebaseDatabase database;
+    private FirebaseAuth mFirebaseAuth;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.confirm_spoiler_alerts);
         mIntent = getIntent();
+        mFirebaseAuth = FirebaseAuth.getInstance();
 //        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
-        mSpoilersRef =  ref.child("spoilers");
+        mUsersRef =  ref.child("users");
         mDateAndTimeTextView = (TextView)findViewById(R.id.timeAndDate_textview);
         //if (mIntent.hasExtra())
         //mDateAndTimeTextView.setText(mIntent);
@@ -70,7 +73,10 @@ public class ConfirmActivity extends AppCompatActivity{
         spoiler.setTitle(spoilerTitle);
         spoiler.setFilterWords(filterWords);
         spoiler.setReminderTime(time);
-        mNewSpoilerRef = mSpoilersRef.push();
-        mNewSpoilerRef.setValue(spoiler);
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        String uniqueId = user.getUid();
+        DatabaseReference spoilerRef = mUsersRef.child(uniqueId).push();
+        spoiler.setUid(spoilerRef.getKey());
+        spoilerRef.setValue(spoiler);
     }
 }

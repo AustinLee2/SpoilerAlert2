@@ -43,7 +43,8 @@ public class SpoilersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_spoilers, container, false);
         this.mView = view;
         mContext = getContext();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("spoilers");
+        String uid = FirebaseAuth.getInstance().getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference("users").child(uid);
         mSpoilerListAdapter = new SpoilerListAdapter(mContext, mDatabase);
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.spoiler_recyclerview);
         mRecyclerView.setAdapter(mSpoilerListAdapter);
@@ -52,7 +53,6 @@ public class SpoilersFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(layoutManager);
         mFirebaseAuth = FirebaseAuth.getInstance();
-
         return view;
     }
 }

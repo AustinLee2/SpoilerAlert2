@@ -1,5 +1,6 @@
 package com.austinhlee.spoileralert;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +20,10 @@ import org.w3c.dom.Text;
 public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, SpoilerListAdapter.SpoilerViewHolder> {
 
     Context mContext;
-
+    DatabaseReference mRef;
+    final public static int EDIT_RC = 14;
+    final public static String UID_KEY = "com.austinhlee.UID_KEY";
+    final public static String WORDS_KEY = "com.austinhlee.WORDS_KEY";
     public static class SpoilerViewHolder extends RecyclerView.ViewHolder{
 
 
@@ -47,12 +51,13 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
 
     SpoilerListAdapter(Context context, DatabaseReference ref){
         super(Spoiler.class, R.layout.spoiler_item_layout, SpoilerViewHolder.class, ref);
+        mRef = ref;
         mContext = context;
     }
 
 
     @Override
-    protected void populateViewHolder(SpoilerListAdapter.SpoilerViewHolder viewHolder, Spoiler model, int position) {
+    protected void populateViewHolder(SpoilerListAdapter.SpoilerViewHolder viewHolder, final Spoiler model, int position) {
         viewHolder.mTitleTextView.setText(model.getTitle());
         viewHolder.mFilterWordsTextView.setText(model.getFilterWords());
         viewHolder.mTimeAndDateTextView.setText(Long.toString(model.getReminderTime()));
@@ -60,7 +65,16 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, EditActivity.class);
-                mContext.startActivity(intent);
+                intent.putExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY, model.getTitle());
+                intent.putExtra(UID_KEY, model.getUid());
+                intent.putExtra(WORDS_KEY, model.getFilterWords());
+                ((Activity)mContext).startActivityForResult(intent,EDIT_RC);
+            }
+        });
+        viewHolder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mRef.child(model.getUid()).removeValue();
             }
         });
     }

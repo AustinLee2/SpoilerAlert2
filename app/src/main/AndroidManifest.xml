@@ -76,6 +76,10 @@
         </service>
 
         <activity android:name=".QRActivity"></activity>
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

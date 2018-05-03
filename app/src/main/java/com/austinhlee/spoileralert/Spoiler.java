@@ -2,6 +2,7 @@ package com.austinhlee.spoileralert;
 
 import com.google.gson.Gson;
 
+import java.util.Date;
 import java.util.List;
 
 /**

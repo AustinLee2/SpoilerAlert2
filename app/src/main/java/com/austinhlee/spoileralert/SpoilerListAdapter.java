@@ -19,6 +19,11 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by Austin Lee on 4/15/2018.
  */
@@ -100,5 +105,19 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
                 }
             }
         });
+        if (model.getReminderTime() != 0) {
+            long dateinLong = model.getReminderTime();
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(dateinLong);
+            viewHolder.mTimeAndDateTextView.setText(formatDueDate(cal.getTime()));
+        }
+        else {
+            viewHolder.mTimeAndDateTextView.setText("N/A");
+        }
+    }
+
+    private String formatDueDate(Date date){
+        DateFormat df = new SimpleDateFormat("HH:mm, dd MMM yy");
+        return df.format(date);
     }
 }

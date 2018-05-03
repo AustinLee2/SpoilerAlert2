@@ -39,6 +39,11 @@ public class HomeFragment extends Fragment {
     public static final int CONFIRM_REQUEST_CODE = 521;
     public static final String SPOILER_TITLE_EXTRA_KEY = "com.austinhlee.spoileralert.SPOILER_TITLE";
     public static final String FILTER_WORDS_EXTRA_KEY = "com.austinhlee.spoileralert.FILTER_WORDS";
+    public static final String DATE_DAY_KEY = "com.austinhlee.spoileralert.DATE_KEY";
+    public static final String DATE_MONTH_KEY = "com.austinhlee.spoileralert.DATE_MONTH_KEY";
+    public static final String DATE_YEAR_KEY = "com.austinhlee.spoileralert.DATE_YEAR_KEY";
+    public static final String TIME_MINUTE_KEY = "com.austinhlee.spoileralert.TIME_MINUTE_KEY";
+    public static final String TIME_HOUR_KEY = "com.austinhlee.spoileralert.TIME_HOUR_KEY";
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -96,13 +101,18 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ConfirmActivity.class);
                 intent.putExtra(SPOILER_TITLE_EXTRA_KEY, spoilerTitle);
                 intent.putExtra(FILTER_WORDS_EXTRA_KEY, filterWords);
+                if (mDatePickerFragment.mDay != 0 && mDatePickerFragment.mMonth != 0 && mDatePickerFragment.mYear != 0 && mTimePickerFragment.mHour != 0 && mTimePickerFragment.mMinute != 0){
+                    intent.putExtra(DATE_DAY_KEY, mDatePickerFragment.mDay);
+                    intent.putExtra(DATE_MONTH_KEY, mDatePickerFragment.mMonth);
+                    intent.putExtra(DATE_YEAR_KEY, mDatePickerFragment.mYear);
+                    intent.putExtra(TIME_HOUR_KEY, mTimePickerFragment.mHour);
+                    intent.putExtra(TIME_MINUTE_KEY, mTimePickerFragment.mMinute);
+                }
                 startActivityForResult(intent, CONFIRM_REQUEST_CODE);
                 //writeNewSpoiler(spoilerTitle, filterWords, getUnixTimeFromFragments());
                 Log.d("TAG", "onClick");
             }
         });
-
-
         return view;
     }
 

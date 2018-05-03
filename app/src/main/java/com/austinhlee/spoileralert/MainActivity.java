@@ -26,8 +26,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+
+import static com.austinhlee.spoileralert.HomeFragment.DATE_DAY_KEY;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,13 +68,14 @@ public class MainActivity extends AppCompatActivity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         userUID = FirebaseAuth.getInstance().getUid();
         if (userUID != null) {
-            DatabaseReference ref = database.getReference("users").child(userUID);
+            ref = database.getReference("users").child(userUID);
         }
         final List<String> filterWords = new ArrayList<>();
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                filterWords.clear();
                 for(DataSnapshot data: dataSnapshot.getChildren()){
                     Spoiler spoiler = data.getValue(Spoiler.class);
                     filterWords.add(spoiler.getFilterWords());
@@ -158,13 +163,31 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Tag", "Confirm cancelled!");
             }
         }
-        else if (requestCode == SpoilerListAdapter.EDIT_RC){
-            if (resultCode == RESULT_OK){
+        else if (requestCode == SpoilerListAdapter.EDIT_RC) {
+            if (resultCode == RESULT_OK) {
                 String uid = data.getStringExtra(SpoilerListAdapter.UID_KEY);
                 String title = data.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY);
                 String words = data.getStringExtra(EditActivity.WORDS_KEY);
-                writeNewSpoiler(title,words,0);
-                mUsersRef.child(userUID).child(uid).removeValue();
+                if (data.hasExtra(EditActivity.DATE_DAY_KEY_EDIT)) {
+                    int hour = data.getIntExtra(HomeFragment.TIME_HOUR_KEY, -1);
+                    int minute = data.getIntExtra(HomeFragment.TIME_MINUTE_KEY, -1);
+                    final int month = data.getIntExtra(HomeFragment.DATE_MONTH_KEY, -1);
+                    int day = data.getIntExtra(HomeFragment.DATE_DAY_KEY, -1);
+                    int year = data.getIntExtra(HomeFragment.DATE_YEAR_KEY, -1);
+                    if (month != -1) {
+                        Calendar myCal = Calendar.getInstance();
+                        myCal.set(Calendar.YEAR, year);
+                        myCal.set(Calendar.MONTH, month);
+                        myCal.set(Calendar.DAY_OF_MONTH, day);
+                        myCal.set(Calendar.HOUR_OF_DAY, hour);
+                        myCal.set(Calendar.MINUTE, minute);
+                        writeNewSpoiler(title,words,myCal.getTimeInMillis());
+                    }
+                    mUsersRef.child(userUID).child(uid).removeValue();
+                } else {
+                    writeNewSpoiler(title,words,0);
+                    mUsersRef.child(userUID).child(uid).removeValue();
+                }
             }
         }
     }

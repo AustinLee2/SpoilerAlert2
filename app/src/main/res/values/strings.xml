@@ -8,7 +8,7 @@
     <string name="category_name_spoiler">Enter Spoiler Alert Name</string>
     <string name="spoiler_words">Enter, Spoiler, Words</string>
     <string name="enter_time">Enter Time Length Here</string>
-    <string name="add_contacts_here">Add People to Share With</string>
+    <string name="add_contacts_here">Add People to Notify</string>
     <string name="submit_spoiler_alert">Submit Spoiler Alert</string>
     <string name="resubmit_spoiler_alert">Re-Submit Spoiler Alert</string>
     <string name="cancel_spoiler_alert">Cancel</string>
@@ -23,6 +23,7 @@
     <string name="name_of_spoiler"><u>Name of Spoiler</u></string>
     <string name="name_of_spoilerAlert">Name of SpoilerAlert</string>
     <string name="shared_with">Shared With</string>
+    <string name="share_with_others">Share With Others</string>
     <string name="time_and_date">Time and Date</string>
     <string name="sign_out">Sign Out</string>
     <string name="scan_text">Scan</string>

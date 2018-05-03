@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="35dp"
             android:text="@string/homeText_item"
             android:textColor="@color/white"
             android:textSize="30sp"
@@ -29,7 +29,7 @@
         android:id="@+id/nameOfSpoilerAlert"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="-10dp"
         android:hint="@string/category_name_spoiler"
         android:padding="15dp"
         android:textAlignment="center"
@@ -43,7 +43,7 @@
         android:id="@+id/triggerWords"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:hint="@string/spoiler_words"
         android:padding="15dp"
         android:textAlignment="center"
@@ -51,9 +51,10 @@
         android:textColorHint="@color/colorPrimary"
         android:textColorLink="@color/colorAccent"
         android:backgroundTint="@color/colorAccent"
+        android:maxLines="4"
         android:textStyle="bold" />
 
-    <EditText
+    <Button
         android:id="@+id/shareWithContacts"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -65,7 +66,8 @@
         android:textColorHint="@color/colorPrimary"
         android:textColorLink="@color/colorAccent"
         android:backgroundTint="@color/colorAccent"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="15sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -109,8 +111,8 @@
         android:id="@+id/sign_out"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_sign_out_button"
         android:text="@string/sign_out"
         android:textColor="@color/colorAccent" />

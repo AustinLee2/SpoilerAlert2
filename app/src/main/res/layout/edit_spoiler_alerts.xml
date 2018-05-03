@@ -25,7 +25,7 @@
         android:id="@+id/nameOfSpoilerAlert"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:hint="@string/category_name_spoiler"
         android:padding="15dp"
         android:textAlignment="center"
@@ -39,7 +39,7 @@
         android:id="@+id/triggerWords"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:hint="@string/spoiler_words"
         android:padding="15dp"
         android:textAlignment="center"
@@ -47,9 +47,10 @@
         android:textColorHint="@color/colorPrimary"
         android:textColorLink="@color/colorAccent"
         android:backgroundTint="@color/colorAccent"
+        android:maxLines="4"
         android:textStyle="bold" />
 
-    <EditText
+    <Button
         android:id="@+id/shareWithContacts"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -61,7 +62,8 @@
         android:textColor="@color/colorPrimary"
         android:textColorHint="@color/colorPrimary"
         android:textColorLink="@color/colorAccent"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="15sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,7 +99,7 @@
         android:id="@+id/resubmitSpoilerAlertButton"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_submitbutton"
         android:text="@string/resubmit_spoiler_alert"
         android:textColor="@color/colorPrimary" />
@@ -106,7 +108,7 @@
         android:id="@+id/cancelSpoilerAlertButton"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_sign_out_button"
         android:text="@string/cancel_edit"
         android:textColor="@color/colorAccent" />

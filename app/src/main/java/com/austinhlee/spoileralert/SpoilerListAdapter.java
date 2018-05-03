@@ -3,6 +3,7 @@ package com.austinhlee.spoileralert;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -10,6 +11,11 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.w3c.dom.Text;
 
@@ -75,6 +81,23 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
             @Override
             public void onClick(View view) {
                 mRef.child(model.getUid()).removeValue();
+            }
+        });
+        viewHolder.mShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text2Qr = model.serialize();
+                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+                try {
+                    BitMatrix bitMatrix = multiFormatWriter.encode(text2Qr, BarcodeFormat.QR_CODE,200,200);
+                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                    Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+                    Intent intent = new Intent(mContext, QRActivity.class);
+                    intent.putExtra("pic",bitmap);
+                    mContext.startActivity(intent);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

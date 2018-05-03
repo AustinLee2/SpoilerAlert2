@@ -3,6 +3,7 @@ package com.austinhlee.spoileralert;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.Telephony;
 import android.support.v4.app.ActivityCompat;
@@ -40,6 +41,9 @@ public class SpoilersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        QRCodeHelper qrCodeHelper = new QRCodeHelper();
+        qrCodeHelper.setContent("This is a test");
+        Bitmap bitmap = qrCodeHelper.generate();
         View view = inflater.inflate(R.layout.fragment_spoilers, container, false);
         this.mView = view;
         mContext = getContext();

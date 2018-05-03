@@ -1,5 +1,7 @@
 package com.austinhlee.spoileralert;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 /**
@@ -47,5 +49,13 @@ public class Spoiler {
 
     public void setReminderTime(long reminderTime) {
         this.reminderTime = reminderTime;
+    }
+
+    public String serialize(){
+        return new Gson().toJson(this);
+    }
+
+    public static Spoiler deserialize(String jsonString){
+        return new Gson().fromJson(jsonString, Spoiler.class);
     }
 }

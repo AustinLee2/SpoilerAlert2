@@ -63,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         userUID = FirebaseAuth.getInstance().getUid();
-        DatabaseReference ref = database.getReference("users").child(userUID);
+        if (userUID != null) {
+            DatabaseReference ref = database.getReference("users").child(userUID);
+        }
         final List<String> filterWords = new ArrayList<>();
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {

@@ -60,7 +60,6 @@ public class ContactsFragment extends Fragment {
            }
            else{
                //Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
-
            }
        }
        else{

@@ -1,12 +1,19 @@
 package com.austinhlee.spoileralert;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,13 +44,14 @@ public class ConfirmActivity extends AppCompatActivity{
     private FirebaseDatabase database;
     private FirebaseAuth mFirebaseAuth;
     private Date theDate;
+    private String mPhoneNumber;
 
+    public static final int SENDSMSKEY = 12512;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.confirm_spoiler_alerts);
         mIntent = getIntent();
-        String phonenumber = mIntent.getStringExtra(HomeFragment.PHONE_NUMBER_KEY);
         mContext = this;
         mFirebaseAuth = FirebaseAuth.getInstance();
 //        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
@@ -56,7 +64,12 @@ public class ConfirmActivity extends AppCompatActivity{
         confirmButton = (Button)findViewById(R.id.ConfirmSpoilerAlertButton);
         cancelButton = (Button)findViewById(R.id.cancelSpoilerAlertButton);
         mPeopleSharedwithTextView = (TextView) findViewById(R.id.PeopleSharedWith);
-        mPeopleSharedwithTextView.setText(phonenumber);
+        if (mIntent.hasExtra(HomeFragment.PHONE_NUMBER_KEY)){
+            mPhoneNumber = mIntent.getStringExtra(HomeFragment.PHONE_NUMBER_KEY);
+            mPeopleSharedwithTextView.setText(mPhoneNumber);
+        } else {
+            mPeopleSharedwithTextView.setText("N/A");
+        }
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,6 +109,9 @@ public class ConfirmActivity extends AppCompatActivity{
                     NotificationScheduler.setReminder(mContext, AlarmReceiver.class, theDate, mIntent.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY),spoiler.getUid(), 12,
                             "The spoiler " + mIntent.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY) + " has ended!");
                 }
+                if (mPhoneNumber != null) {
+                    sendSMS(mPhoneNumber, "I setup a spoiler alert to prevent spoiler alerts!");
+                }
                 else {
                     writeNewSpoiler(mIntent.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY),mIntent.getStringExtra(HomeFragment.FILTER_WORDS_EXTRA_KEY),0);
                 }
@@ -122,5 +138,18 @@ public class ConfirmActivity extends AppCompatActivity{
     private String formatDueDate(Date date){
         DateFormat df = new SimpleDateFormat("HH:mm, dd MMM yy");
         return df.format(date);
+    }
+
+    public void sendSMS(String phoneNo, String msg) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+            Toast.makeText(getApplicationContext(), "Message Sent to " + phoneNo + "!",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
     }
 }

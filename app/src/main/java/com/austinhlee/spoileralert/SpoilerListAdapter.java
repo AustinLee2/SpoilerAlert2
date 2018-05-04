@@ -1,13 +1,16 @@
 package com.austinhlee.spoileralert;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -85,7 +88,16 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
         viewHolder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mRef.child(model.getUid()).removeValue();
+                AlertDialog ad = new AlertDialog.Builder(mContext)
+                        .setTitle("Title")
+                        .setMessage("Do you really want to delete " + model.getTitle() + "?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                mRef.child(model.getUid()).removeValue();
+                                Toast.makeText(mContext, "Deleted " + model.getTitle() + "!", Toast.LENGTH_SHORT).show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
         viewHolder.mShareButton.setOnClickListener(new View.OnClickListener() {

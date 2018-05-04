@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,6 +78,7 @@ public class HomeFragment extends Fragment {
                 if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
                     getActivity().startActivityForResult(intent, CONTACT_RC);
                 }
+
             }
         });
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -112,27 +114,30 @@ public class HomeFragment extends Fragment {
         });
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
 
-
             @Override
             public void onClick(View view) {
-                String spoilerTitle = mTitleEditText.getText().toString();
-                String filterWords = mFilterWordsEditText.getText().toString();
-                Intent intent = new Intent(getActivity(), ConfirmActivity.class);
-                intent.putExtra(SPOILER_TITLE_EXTRA_KEY, spoilerTitle);
-                intent.putExtra(FILTER_WORDS_EXTRA_KEY, filterWords);
-                if (MainActivity.mPhoneNumber != null) {
-                    intent.putExtra(PHONE_NUMBER_KEY, MainActivity.mPhoneNumber);
+                if (TextUtils.isEmpty(mTitleEditText.getText()) || TextUtils.isEmpty(mFilterWordsEditText.getText())){
+                    Toast.makeText(mContext, "Must fill out spoiler title and words!", Toast.LENGTH_LONG).show();
+                } else {
+                    String spoilerTitle = mTitleEditText.getText().toString();
+                    String filterWords = mFilterWordsEditText.getText().toString();
+                    Intent intent = new Intent(getActivity(), ConfirmActivity.class);
+                    intent.putExtra(SPOILER_TITLE_EXTRA_KEY, spoilerTitle);
+                    intent.putExtra(FILTER_WORDS_EXTRA_KEY, filterWords);
+                    if (MainActivity.mPhoneNumber != null) {
+                        intent.putExtra(PHONE_NUMBER_KEY, MainActivity.mPhoneNumber);
+                    }
+                    if (mDatePickerFragment.mDay != 0 && mDatePickerFragment.mMonth != 0 && mDatePickerFragment.mYear != 0 && mTimePickerFragment.mHour != 0 && mTimePickerFragment.mMinute != 0) {
+                        intent.putExtra(DATE_DAY_KEY, mDatePickerFragment.mDay);
+                        intent.putExtra(DATE_MONTH_KEY, mDatePickerFragment.mMonth);
+                        intent.putExtra(DATE_YEAR_KEY, mDatePickerFragment.mYear);
+                        intent.putExtra(TIME_HOUR_KEY, mTimePickerFragment.mHour);
+                        intent.putExtra(TIME_MINUTE_KEY, mTimePickerFragment.mMinute);
+                    }
+                    getActivity().startActivityForResult(intent, CONFIRM_REQUEST_CODE);
+                    //writeNewSpoiler(spoilerTitle, filterWords, getUnixTimeFromFragments());
+                    Log.d("TAG", "onClick");
                 }
-                if (mDatePickerFragment.mDay != 0 && mDatePickerFragment.mMonth != 0 && mDatePickerFragment.mYear != 0 && mTimePickerFragment.mHour != 0 && mTimePickerFragment.mMinute != 0){
-                    intent.putExtra(DATE_DAY_KEY, mDatePickerFragment.mDay);
-                    intent.putExtra(DATE_MONTH_KEY, mDatePickerFragment.mMonth);
-                    intent.putExtra(DATE_YEAR_KEY, mDatePickerFragment.mYear);
-                    intent.putExtra(TIME_HOUR_KEY, mTimePickerFragment.mHour);
-                    intent.putExtra(TIME_MINUTE_KEY, mTimePickerFragment.mMinute);
-                }
-                startActivityForResult(intent, CONFIRM_REQUEST_CODE);
-                //writeNewSpoiler(spoilerTitle, filterWords, getUnixTimeFromFragments());
-                Log.d("TAG", "onClick");
             }
         });
         return view;

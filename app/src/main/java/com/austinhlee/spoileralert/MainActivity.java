@@ -65,13 +65,13 @@ public class MainActivity extends AppCompatActivity {
         mContext = this;
         Intent loginIntent = new Intent(this, LoginActivity.class);
         ActivityCompat.requestPermissions(MainActivity.this,
-                new String[]{Manifest.permission.READ_CONTACTS},
+                new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.SEND_SMS},
                 1);
         if (!Telephony.Sms.getDefaultSmsPackage(mContext).equals(getPackageName())){
             Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
             intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, getPackageName());
             startActivity(intent);
-            //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, MY_PERMISSIONS_REQUEST_SMS_RECEIVE);
+
         }
         if (mFirebaseAuth.getCurrentUser() == null) {
             startActivity(loginIntent);
@@ -172,8 +172,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == HomeFragment.CONFIRM_REQUEST_CODE){
-            if (resultCode == RESULT_CANCELED){
-                Log.d("Tag", "Confirm cancelled!");
+            if (resultCode == RESULT_OK){
+                Toast.makeText(mContext, "Created spoiler!", Toast.LENGTH_LONG).show();
             }
         }
         else if (requestCode == SpoilerListAdapter.EDIT_RC) {

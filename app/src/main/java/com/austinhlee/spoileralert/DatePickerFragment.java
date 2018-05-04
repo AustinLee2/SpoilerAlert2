@@ -52,4 +52,9 @@ public class DatePickerFragment extends DialogFragment
         mDatePreview.setVisibility(View.VISIBLE);
         mDatePreview.setText((month+1)+"/"+day+"/"+year);
     }
+
+    public void refreshPreview(){
+        mDatePreview.setVisibility(View.VISIBLE);
+        mDatePreview.setText((mMonth+1)+"/"+mDay+"/"+mYear);
+    }
 }

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
@@ -16,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,6 +40,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static com.austinhlee.spoileralert.HomeFragment.CONTACT_RC;
 import static com.austinhlee.spoileralert.HomeFragment.DATE_DAY_KEY;
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private Context mContext;
     private String userUID;
     static public String mPhoneNumber;
+    private List<String> filterWords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
         mUsersRef =  ref.child("users");
         mContext = this;
         Intent loginIntent = new Intent(this, LoginActivity.class);
-        ActivityCompat.requestPermissions(MainActivity.this,
-                new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.SEND_SMS},
-                1);
+        if (ContextCompat.checkSelfPermission(mContext,Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.SEND_SMS},
+                    1);
+        }
         if (!Telephony.Sms.getDefaultSmsPackage(mContext).equals(getPackageName())){
             Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
             intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, getPackageName());
@@ -83,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         if (userUID != null) {
             ref = database.getReference("users").child(userUID);
         }
-        final List<String> filterWords = new ArrayList<>();
+        filterWords = new ArrayList<>();
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -91,7 +97,9 @@ public class MainActivity extends AppCompatActivity {
                 filterWords.clear();
                 for(DataSnapshot data: dataSnapshot.getChildren()){
                     Spoiler spoiler = data.getValue(Spoiler.class);
-                    List<String> items = Arrays.asList(spoiler.getFilterWords().split(","));
+                    String REGEX = "\\s*(\\s|,|=>)\\s*";
+                    final Pattern p = Pattern.compile(REGEX);
+                    List<String> items = Arrays.asList(p.split(spoiler.getFilterWords()));
                     filterWords.addAll(items);
                 }
                 for (String s: filterWords){
@@ -134,6 +142,10 @@ public class MainActivity extends AppCompatActivity {
             public void messageReceived(String messageText) {
                 String myPackageName = getPackageName();
                 List<String> textWordList = new ArrayList<>(Arrays.asList(messageText.split(" ")));
+                for (String s: textWordList){
+                    textWordList.clear();
+                    textWordList.add(s.toLowerCase());
+                }
                 //From the received text string you may do string operations to get the required OTP
                 //It depends on your SMS format
                 if (!Telephony.Sms.getDefaultSmsPackage(mContext).equals(myPackageName)) {
@@ -186,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                     int hour = data.getIntExtra(HomeFragment.TIME_HOUR_KEY, -1);
                     int minute = data.getIntExtra(HomeFragment.TIME_MINUTE_KEY, -1);
                     final int month = data.getIntExtra(HomeFragment.DATE_MONTH_KEY, -1);
-                    int day = data.getIntExtra(HomeFragment.DATE_DAY_KEY, -1);
+                    int day = data.getIntExtra(EditActivity.DATE_DAY_KEY_EDIT, -1);
                     int year = data.getIntExtra(HomeFragment.DATE_YEAR_KEY, -1);
                     if (month != -1) {
                         Calendar myCal = Calendar.getInstance();
@@ -238,5 +250,35 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference spoilerRef = mUsersRef.child(uniqueId).push();
         spoiler.setUid(spoilerRef.getKey());
         spoilerRef.setValue(spoiler);
+    }
+
+    private void refreshFilterList(){
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                filterWords.clear();
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Spoiler spoiler = data.getValue(Spoiler.class);
+                    String REGEX = "\\s*(\\s|,|=>)\\s*";
+                    final Pattern p = Pattern.compile(REGEX);
+                    List<String> items = Arrays.asList(p.split(spoiler.getFilterWords().toLowerCase()));
+                    filterWords.addAll(items);
+                }
+                for (String s: filterWords){
+                    System.out.println(s);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // ...
+            }
+        });
     }
 }

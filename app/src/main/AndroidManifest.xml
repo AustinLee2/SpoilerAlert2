@@ -17,16 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/MyTheme">
         SpoilerAlertLogoOnly.png
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".EditActivity" />
-        <activity android:name=".ConfirmActivity" />
+        <activity android:name=".LoginActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".EditActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ConfirmActivity" android:screenOrientation="portrait" />
 
         <receiver
             android:name=".IncomingSms"
@@ -45,7 +45,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ComposeSmsActivity">
+        <activity android:name=".ComposeSmsActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <action android:name="android.intent.action.SENDTO" />
@@ -76,7 +76,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".QRActivity"></activity>
+        <activity android:name=".QRActivity" android:screenOrientation="portrait"/>
         <receiver
             android:name=".AlarmReceiver"
             android:enabled="true"

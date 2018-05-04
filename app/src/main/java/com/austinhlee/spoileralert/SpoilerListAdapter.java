@@ -38,6 +38,7 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
     final public static int EDIT_RC = 14;
     final public static String UID_KEY = "com.austinhlee.UID_KEY";
     final public static String WORDS_KEY = "com.austinhlee.WORDS_KEY";
+    final public static String DATE_KEY = "com.austinhlee.DATE_KEY";
     public static class SpoilerViewHolder extends RecyclerView.ViewHolder{
 
 
@@ -82,6 +83,9 @@ public class SpoilerListAdapter extends FirebaseRecyclerAdapter<Spoiler, Spoiler
                 intent.putExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY, model.getTitle());
                 intent.putExtra(UID_KEY, model.getUid());
                 intent.putExtra(WORDS_KEY, model.getFilterWords());
+                if (model.getReminderTime() != 0){
+                    intent.putExtra(DATE_KEY, model.getReminderTime());
+                }
                 ((Activity)mContext).startActivityForResult(intent,EDIT_RC);
             }
         });

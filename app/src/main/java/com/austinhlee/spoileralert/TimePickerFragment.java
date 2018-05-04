@@ -52,5 +52,13 @@ public class TimePickerFragment extends DialogFragment
         return mMinute;
     }
 
+    public void refreshPreivew(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Calendar cal = Calendar.getInstance();
+        Date dueDate = (Date)cal.getTime();
+        //cal.set(2018,4,20,mHour,mMinute);
+        //mButton.setText(dateFormat.format(dueDate));
+    }
+
 }
 

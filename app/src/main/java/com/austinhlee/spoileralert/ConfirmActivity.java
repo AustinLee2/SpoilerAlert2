@@ -109,11 +109,11 @@ public class ConfirmActivity extends AppCompatActivity{
                     NotificationScheduler.setReminder(mContext, AlarmReceiver.class, theDate, mIntent.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY),spoiler.getUid(), 12,
                             "The spoiler " + mIntent.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY) + " has ended!");
                 }
+                else if (theDate == null){
+                    writeNewSpoiler(mIntent.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY),mIntent.getStringExtra(HomeFragment.FILTER_WORDS_EXTRA_KEY),0);
+                }
                 if (mPhoneNumber != null) {
                     sendSMS(mPhoneNumber, "I setup a spoiler alert to prevent spoiler alerts!");
-                }
-                else {
-                    writeNewSpoiler(mIntent.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY),mIntent.getStringExtra(HomeFragment.FILTER_WORDS_EXTRA_KEY),0);
                 }
                 setResult(RESULT_OK);
                 finish();

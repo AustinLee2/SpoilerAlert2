@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import static com.austinhlee.spoileralert.HomeFragment.DATE_DAY_KEY;
 import static com.austinhlee.spoileralert.HomeFragment.DATE_MONTH_KEY;
 import static com.austinhlee.spoileralert.HomeFragment.DATE_YEAR_KEY;
@@ -36,15 +39,6 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_spoiler_alerts);
-        mTimePickerFragment = new TimePickerFragment();
-        mDatePickerFragment = new DatePickerFragment();
-        mEditTextTitle = (EditText)findViewById(R.id.nameOfSpoilerAlert);
-        mEditWords = (EditText)findViewById(R.id.triggerWords);
-        final Intent intent = getIntent();
-        String title = intent.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY);
-        String filterWords = intent.getStringExtra(SpoilerListAdapter.WORDS_KEY);
-        mEditTextTitle.setText(title);
-        mEditWords.setText(filterWords);
         mTimeButton = (Button)findViewById(R.id.setTime);
         mTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +55,28 @@ public class EditActivity extends AppCompatActivity {
                 mDatePickerFragment.show(fm, "tag");
             }
         });
+        final Intent intent = getIntent();
+        mTimePickerFragment = new TimePickerFragment();
+        mDatePickerFragment = new DatePickerFragment();
+        if (intent.hasExtra(SpoilerListAdapter.DATE_KEY)){
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(intent.getLongExtra(SpoilerListAdapter.DATE_KEY,0));
+            mTimePickerFragment.mMinute = cal.get(Calendar.MINUTE);
+            mTimePickerFragment.mHour = cal.get(Calendar.HOUR_OF_DAY);
+            //mTimePickerFragment.refreshPreivew();
+            mDatePickerFragment.mMonth = cal.get(Calendar.MONTH);
+            mDatePickerFragment.mYear = cal.get(Calendar.YEAR);
+            mDatePickerFragment.mDay = cal.get(Calendar.DAY_OF_MONTH);
+            mDateButton.setText((mDatePickerFragment.mMonth+1)+"/"+mDatePickerFragment.mDay+"/"+mDatePickerFragment.mYear);
+            mTimeButton.setText(mTimePickerFragment.mHour + ":" + mTimePickerFragment.mMinute);
+
+        }
+        mEditTextTitle = (EditText)findViewById(R.id.nameOfSpoilerAlert);
+        mEditWords = (EditText)findViewById(R.id.triggerWords);
+        String title = intent.getStringExtra(HomeFragment.SPOILER_TITLE_EXTRA_KEY);
+        String filterWords = intent.getStringExtra(SpoilerListAdapter.WORDS_KEY);
+        mEditTextTitle.setText(title);
+        mEditWords.setText(filterWords);
         mResubmitSpoilerAlert = (Button)findViewById(R.id.resubmitSpoilerAlertButton);
         mResubmitSpoilerAlert.setOnClickListener(new View.OnClickListener() {
             @Override

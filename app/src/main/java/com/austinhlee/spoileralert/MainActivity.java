@@ -91,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 filterWords.clear();
                 for(DataSnapshot data: dataSnapshot.getChildren()){
                     Spoiler spoiler = data.getValue(Spoiler.class);
-                    filterWords.add(spoiler.getFilterWords());
+                    List<String> items = Arrays.asList(spoiler.getFilterWords().split(","));
+                    filterWords.addAll(items);
                 }
                 for (String s: filterWords){
                     System.out.println(s);

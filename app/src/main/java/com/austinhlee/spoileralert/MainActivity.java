@@ -1,14 +1,22 @@
 package com.austinhlee.spoileralert;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +39,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import static com.austinhlee.spoileralert.HomeFragment.CONTACT_RC;
 import static com.austinhlee.spoileralert.HomeFragment.DATE_DAY_KEY;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private int MY_PERMISSIONS_REQUEST_SMS_RECEIVE = 10;
     private Context mContext;
     private String userUID;
+    static public String mPhoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +64,14 @@ public class MainActivity extends AppCompatActivity {
         mUsersRef =  ref.child("users");
         mContext = this;
         Intent loginIntent = new Intent(this, LoginActivity.class);
+        ActivityCompat.requestPermissions(MainActivity.this,
+                new String[]{Manifest.permission.READ_CONTACTS},
+                1);
         if (!Telephony.Sms.getDefaultSmsPackage(mContext).equals(getPackageName())){
             Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
             intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, getPackageName());
             startActivity(intent);
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, MY_PERMISSIONS_REQUEST_SMS_RECEIVE);
+            //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, MY_PERMISSIONS_REQUEST_SMS_RECEIVE);
         }
         if (mFirebaseAuth.getCurrentUser() == null) {
             startActivity(loginIntent);
@@ -187,6 +200,22 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     writeNewSpoiler(title,words,0);
                     mUsersRef.child(userUID).child(uid).removeValue();
+                }
+            }
+        } else if (requestCode == HomeFragment.CONTACT_RC) {
+            if (resultCode == Activity.RESULT_OK) {
+                // Get the URI and query the content provider for the phone number
+                Uri contactUri = data.getData();
+                String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER};
+                Cursor cursor = getContentResolver().query(contactUri, projection,
+                        null, null, null);
+                // If the cursor returned is valid, get the phone number
+                if (cursor != null && cursor.moveToFirst()) {
+                    int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                    String number = cursor.getString(numberIndex);
+                    // Do something with the phone number
+                    mPhoneNumber = number;
+                    Log.d("TAG", mPhoneNumber);
                 }
             }
         }

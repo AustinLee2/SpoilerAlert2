@@ -27,6 +27,7 @@ public class ConfirmActivity extends AppCompatActivity{
     private TextView mNameTextView;
     private TextView mFilterWordsTextView;
     private TextView mDateAndTimeTextView;
+    private TextView mPeopleSharedwithTextView;
     private Button confirmButton;
     private Button cancelButton;
     private Intent mIntent;
@@ -42,6 +43,7 @@ public class ConfirmActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.confirm_spoiler_alerts);
         mIntent = getIntent();
+        String phonenumber = mIntent.getStringExtra(HomeFragment.PHONE_NUMBER_KEY);
         mContext = this;
         mFirebaseAuth = FirebaseAuth.getInstance();
 //        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
@@ -53,10 +55,13 @@ public class ConfirmActivity extends AppCompatActivity{
         //mDateAndTimeTextView.setText(mIntent);
         confirmButton = (Button)findViewById(R.id.ConfirmSpoilerAlertButton);
         cancelButton = (Button)findViewById(R.id.cancelSpoilerAlertButton);
+        mPeopleSharedwithTextView = (TextView) findViewById(R.id.PeopleSharedWith);
+        mPeopleSharedwithTextView.setText(phonenumber);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setResult(RESULT_CANCELED);
+                MainActivity.mPhoneNumber = null;
                 finish();
             }
         });

@@ -3,10 +3,13 @@ package com.austinhlee.spoileralert;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.Telephony;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,7 @@ public class HomeFragment extends Fragment {
     private Button mSubmitButton;
     private Button mTimeButton;
     private Button mDateButton;
+    private Button mShareButton;
     private EditText mTitleEditText;
     private EditText mFilterWordsEditText;
     private DatabaseReference mDatabase;
@@ -36,6 +40,7 @@ public class HomeFragment extends Fragment {
     private DatePickerFragment mDatePickerFragment;
     private Button mSignOutButton;
 
+    public static final int CONTACT_RC = 42;
     public static final int CONFIRM_REQUEST_CODE = 521;
     public static final String SPOILER_TITLE_EXTRA_KEY = "com.austinhlee.spoileralert.SPOILER_TITLE";
     public static final String FILTER_WORDS_EXTRA_KEY = "com.austinhlee.spoileralert.FILTER_WORDS";
@@ -44,6 +49,7 @@ public class HomeFragment extends Fragment {
     public static final String DATE_YEAR_KEY = "com.austinhlee.spoileralert.DATE_YEAR_KEY";
     public static final String TIME_MINUTE_KEY = "com.austinhlee.spoileralert.TIME_MINUTE_KEY";
     public static final String TIME_HOUR_KEY = "com.austinhlee.spoileralert.TIME_HOUR_KEY";
+    public static final String PHONE_NUMBER_KEY = "com.austinhlee.spoileralert.PHONE_HOUR_KEY";
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -62,6 +68,17 @@ public class HomeFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mContext = getContext();
         this.mView = view;
+        mShareButton = mView.findViewById(R.id.shareWithContacts);
+        mShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    getActivity().startActivityForResult(intent, CONTACT_RC);
+                }
+            }
+        });
         mFirebaseAuth = FirebaseAuth.getInstance();
         mTitleEditText = (EditText)mView.findViewById(R.id.nameOfSpoilerAlert);
         mFilterWordsEditText = (EditText)mView.findViewById(R.id.triggerWords);
@@ -94,6 +111,8 @@ public class HomeFragment extends Fragment {
             }
         });
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
                 String spoilerTitle = mTitleEditText.getText().toString();
@@ -101,6 +120,9 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ConfirmActivity.class);
                 intent.putExtra(SPOILER_TITLE_EXTRA_KEY, spoilerTitle);
                 intent.putExtra(FILTER_WORDS_EXTRA_KEY, filterWords);
+                if (MainActivity.mPhoneNumber != null) {
+                    intent.putExtra(PHONE_NUMBER_KEY, MainActivity.mPhoneNumber);
+                }
                 if (mDatePickerFragment.mDay != 0 && mDatePickerFragment.mMonth != 0 && mDatePickerFragment.mYear != 0 && mTimePickerFragment.mHour != 0 && mTimePickerFragment.mMinute != 0){
                     intent.putExtra(DATE_DAY_KEY, mDatePickerFragment.mDay);
                     intent.putExtra(DATE_MONTH_KEY, mDatePickerFragment.mMonth);

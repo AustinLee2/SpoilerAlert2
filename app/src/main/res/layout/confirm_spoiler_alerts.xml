@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
-        android:text="@string/shared_with"
+        android:text="Notified"
         android:background="@color/colorAccent"
         android:textColor="@color/white"
         android:textStyle="bold"

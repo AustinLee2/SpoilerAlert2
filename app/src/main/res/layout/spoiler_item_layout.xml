@@ -61,6 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/spoilerAlertName_textview"
         android:layout_weight="1"
+        android:maxLength="30"
         android:textSize="13sp"
         android:textColor="@color/colorAccent"
         android:textStyle="bold"

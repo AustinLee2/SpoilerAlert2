@@ -33,6 +33,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -184,6 +186,21 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+        if(result != null){
+            if(result.getContents()==null){
+                Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
+            }
+            else{
+                Spoiler spoiler = Spoiler.deserialize(result.getContents());
+                Toast.makeText(this, "Successfully imported " + spoiler.getTitle() + "!", Toast.LENGTH_LONG).show();
+                writeNewSpoiler(spoiler);
+                Log.d("TAG", "SUCCESFULLY SCANNED");
+            }
+        }
+        else{
+            super.onActivityResult(requestCode, resultCode, data);
+        }
         if (requestCode == HomeFragment.CONFIRM_REQUEST_CODE){
             if (resultCode == RESULT_OK){
                 Toast.makeText(mContext, "Created spoiler!", Toast.LENGTH_LONG).show();
@@ -245,6 +262,13 @@ public class MainActivity extends AppCompatActivity {
         spoiler.setTitle(spoilerTitle);
         spoiler.setFilterWords(filterWords);
         spoiler.setReminderTime(time);
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        String uniqueId = user.getUid();
+        DatabaseReference spoilerRef = mUsersRef.child(uniqueId).push();
+        spoiler.setUid(spoilerRef.getKey());
+        spoilerRef.setValue(spoiler);
+    }
+    public void writeNewSpoiler(Spoiler spoiler){
         FirebaseUser user = mFirebaseAuth.getCurrentUser();
         String uniqueId = user.getUid();
         DatabaseReference spoilerRef = mUsersRef.child(uniqueId).push();
